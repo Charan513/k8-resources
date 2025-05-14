@@ -4,13 +4,13 @@ kind: Service
 metadata:
   name: nginx-np
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:              # Lables are used as selectors 
     project: expense
     component: backend
     environment: dev
     version: "1.0.0"
-    demo: np
+    demo: lb
   ports:
     - protocol: TCP
       port: 80           # Service port
@@ -22,13 +22,13 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: backend-np
+  name: backend-lb
   labels:
     project: expense
     component: backend
     environment: dev
     version: "1.0.0"
-    demo: np
+    demo: lb
 spec:
   containers:
     - name: nginx
